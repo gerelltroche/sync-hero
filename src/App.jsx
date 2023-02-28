@@ -1,22 +1,24 @@
 import React from "react";
 import "./App.css";
 import Hero from "./Components/Hero";
-import { Peer } from "peerjs";
+import ConnectionForm from "./Components/ConnectionForm";
 
 function App() {
 	const [folders, setFolders] = React.useState([]);
 	const [connectionId, setConnectionId] = React.useState("");
-	const [peer, setPeer] = React.useState(new Peer());
+	const [peerObject, setPeerObject] = React.useState();
 
-	peer.on("connection", function (conn) {
-		conn.on("data", function (data) {
-			console.log(data);
+	if (peerObject) {
+		peerObject.on("connection", function (conn) {
+			conn.on("data", function (data) {
+				console.log(data);
+			});
 		});
-	});
+	}
 
 	function handleConnection(e) {
 		e.preventDefault();
-		const connection = peer.connect(connectionId);
+		const connection = peerObject.connect(connectionId);
 		connection.on("open", function () {
 			connection.send("hi");
 		});
@@ -44,7 +46,7 @@ function App() {
 
 	return (
 		<>
-			<div className="h-96">
+			<div className="h-96 w-full">
 				<form onSubmit={(e) => handleConnection(e)}>
 					<label>hi</label>
 					<input
@@ -52,6 +54,10 @@ function App() {
 						onChange={(e) => setConnectionId(e.target.value)}
 					></input>
 				</form>
+				<ConnectionForm
+					peerObject={peerObject}
+					setPeerObject={setPeerObject}
+				/>
 				<Hero
 					purpleText="Shred together, faster!"
 					title="SyncHero"
