@@ -9,13 +9,14 @@ function App() {
 	const [connectionId, setConnectionId] = React.useState("");
 	const [peerObject, setPeerObject] = React.useState(new Peer());
 
-	if (peerObject) {
+	React.useEffect(() => {
 		peerObject.on("connection", function (conn) {
+			console.log(conn);
 			conn.on("data", function (data) {
 				console.log(data);
 			});
 		});
-	}
+	}, [peerObject]);
 
 	function handleConnection(e) {
 		e.preventDefault();
