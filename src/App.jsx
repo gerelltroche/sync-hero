@@ -20,7 +20,7 @@ function App() {
 		}
 	}
 
-	async function handleChange(event) {
+	async function handleChange() {
 		setFolders([]);
 		getFolders();
 	}
