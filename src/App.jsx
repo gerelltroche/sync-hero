@@ -1,12 +1,13 @@
 import React from "react";
 import "./App.css";
 import Hero from "./Components/Hero";
+import { Peer } from "peerjs";
 import ConnectionForm from "./Components/ConnectionForm";
 
 function App() {
 	const [folders, setFolders] = React.useState([]);
 	const [connectionId, setConnectionId] = React.useState("");
-	const [peerObject, setPeerObject] = React.useState();
+	const [peerObject, setPeerObject] = React.useState(new Peer());
 
 	if (peerObject) {
 		peerObject.on("connection", function (conn) {
