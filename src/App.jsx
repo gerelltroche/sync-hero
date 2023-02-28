@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.css'
 import Hero from './Components/Hero'
-import CardGrid from './Components/CardGrid'
 
 function App() {
 
@@ -36,8 +35,6 @@ function App() {
         title="SyncHero"
         tagLine="Quickly identify and sync songs between players in CloneHero"
       />
-      {folders.length > 0 ? <CardGrid cards={folders}>
-      </CardGrid> : null}
       <button onClick={handleChange} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Button Instead</button>
       <br />
       {folders.length > 0 ? <ol className='max-h-96 border border-gray-200 rounded overflow-scroll shadow-md'>
