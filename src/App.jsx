@@ -1,9 +1,26 @@
 import React from "react";
 import "./App.css";
 import Hero from "./Components/Hero";
+import { Peer } from "peerjs";
 
 function App() {
 	const [folders, setFolders] = React.useState([]);
+	const [connectionId, setConnectionId] = React.useState("");
+	const [peer, setPeer] = React.useState(new Peer());
+
+	peer.on("connection", function (conn) {
+		conn.on("data", function (data) {
+			console.log(data);
+		});
+	});
+
+	function handleConnection(e) {
+		e.preventDefault();
+		const connection = peer.connect(connectionId);
+		connection.on("open", function () {
+			connection.send("hi");
+		});
+	}
 
 	async function getFolders() {
 		const newFolders = [];
@@ -28,6 +45,13 @@ function App() {
 	return (
 		<>
 			<div className="h-96">
+				<form onSubmit={(e) => handleConnection(e)}>
+					<label>hi</label>
+					<input
+						value={connectionId}
+						onChange={(e) => setConnectionId(e.target.value)}
+					></input>
+				</form>
 				<Hero
 					purpleText="Shred together, faster!"
 					title="SyncHero"
