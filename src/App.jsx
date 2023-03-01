@@ -6,7 +6,7 @@ import ConnectionForm from "./Components/ConnectionForm";
 
 function App() {
 	const [folders, setFolders] = React.useState([]);
-	const [connectionId, setConnectionId] = React.useState("");
+	const [roomName, setRoomName] = React.useState("");
 	const [peerObject, setPeerObject] = React.useState(new Peer());
 
 	React.useEffect(() => {
@@ -17,14 +17,6 @@ function App() {
 			});
 		});
 	}, [peerObject]);
-
-	function handleConnection(e) {
-		e.preventDefault();
-		const connection = peerObject.connect(connectionId);
-		connection.on("open", function () {
-			connection.send("hi");
-		});
-	}
 
 	async function getFolders() {
 		const newFolders = [];
@@ -49,16 +41,11 @@ function App() {
 	return (
 		<>
 			<div className="h-96 w-full">
-				<form onSubmit={(e) => handleConnection(e)}>
-					<label>hi</label>
-					<input
-						value={connectionId}
-						onChange={(e) => setConnectionId(e.target.value)}
-					></input>
-				</form>
 				<ConnectionForm
 					peerObject={peerObject}
 					setPeerObject={setPeerObject}
+					roomName={roomName}
+					setRoomName={setRoomName}
 				/>
 				<Hero
 					purpleText="Shred together, faster!"
