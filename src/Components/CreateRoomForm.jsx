@@ -29,12 +29,16 @@ export default function CreateRoomForm({
 			onSubmit={(e) => handleNameSubmit(e)}
 			className="flex p-6"
 		>
-			<label className="label">
+			<label
+				className="label"
+				htmlFor="room"
+			>
 				<span className="label-text">Create a Room</span>
 			</label>
 			<input
 				type="text"
 				placeholder="Enter your Room Name"
+				id="room"
 				className="input input-bordered w-full sm:max-w-xs"
 				value={roomName}
 				onChange={(e) => setRoomName(e.target.value)}
