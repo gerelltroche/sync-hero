@@ -3,6 +3,7 @@ export default function CreateRoomForm({
 	setRoomName,
 	hasPeerBeenSet,
 	setHasPeerBeenSet,
+	setPeerObjectToClear,
 	setPeerObjectToRoomName
 }) {
 	function handleNameSubmit(e) {
@@ -14,12 +15,50 @@ export default function CreateRoomForm({
 		setHasPeerBeenSet(true);
 	}
 
+	function handleClearRoom() {
+		setRoomName("");
+		setPeerObjectToClear();
+		setHasPeerBeenSet(false);
+	}
+
 	return hasPeerBeenSet ? (
 		<div className="flex flex-col justify-items-start border p-6">
-			<p className="text-black text-xl text-left">
-				You're now in Room:{" "}
-				<span className="font-bold text-indigo-600/95">{roomName}</span>
-			</p>
+			<div className="flex flex-row-reverse justify-between">
+				<div
+					className="tooltip"
+					data-tip="Leave Room"
+				>
+					<button
+						className="btn btn-square"
+						onClick={handleClearRoom}
+					>
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							className="h-6 w-6"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor"
+						>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M6 18L18 6M6 6l12 12"
+							/>
+						</svg>
+					</button>
+				</div>
+				<p className="text-black text-xl text-left">
+					You're now in Room:{" "}
+					<span
+						className="font-bold text-indigo-600/95"
+						data-tip="Copy Text"
+						onClick={(e) => navigator.clipboard.writeText(e.target.innerText)}
+					>
+						{roomName}
+					</span>
+				</p>
+			</div>
 			<p className="text-slate">
 				Share this with your shredding partner so they can join!
 			</p>
@@ -33,7 +72,7 @@ export default function CreateRoomForm({
 				className="label"
 				htmlFor="room"
 			>
-				<span className="label-text">Create a Room</span>
+				<span className="label-text">Make a Room</span>
 			</label>
 			<input
 				type="text"
@@ -44,7 +83,7 @@ export default function CreateRoomForm({
 				onChange={(e) => setRoomName(e.target.value)}
 				disabled={hasPeerBeenSet}
 			/>
-			<button className="btn">Set Room Name</button>
+			<button className="btn">Create Room</button>
 		</form>
 	);
 }

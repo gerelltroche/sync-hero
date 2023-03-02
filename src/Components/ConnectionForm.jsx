@@ -10,6 +10,7 @@ export default function ConnectionForm({
 }) {
 	const [connectionId, setConnectionId] = React.useState("");
 	const setPeerObjectToRoomName = (name) => setPeerObject(new Peer(name));
+	const setPeerObjectToClear = (name) => setPeerObject(new Peer());
 	const [hasPeerBeenSet, setHasPeerBeenSet] = React.useState(false);
 
 	function handleConnection(e) {
@@ -28,6 +29,7 @@ export default function ConnectionForm({
 				hasPeerBeenSet={hasPeerBeenSet}
 				setHasPeerBeenSet={setHasPeerBeenSet}
 				setPeerObjectToRoomName={setPeerObjectToRoomName}
+				setPeerObjectToClear={setPeerObjectToClear}
 			/>
 			<form onSubmit={(e) => handleConnection(e)}>
 				<label className="label">
