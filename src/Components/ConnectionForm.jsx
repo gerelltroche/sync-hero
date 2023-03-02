@@ -10,8 +10,8 @@ export default function ConnectionForm({
 }) {
 	const [connectionId, setConnectionId] = React.useState("");
 	const setPeerObjectToRoomName = (name) => setPeerObject(new Peer(name));
-	const setPeerObjectToClear = (name) => setPeerObject(new Peer());
-	const [hasPeerBeenSet, setHasPeerBeenSet] = React.useState(false);
+	const setPeerObjectToClear = () => setPeerObject(new Peer());
+	const [inCreatedRoom, setInCreatedRoom] = React.useState(false);
 
 	function handleConnection(e) {
 		e.preventDefault();
@@ -26,29 +26,31 @@ export default function ConnectionForm({
 			<CreateRoomForm
 				roomName={roomName}
 				setRoomName={setRoomName}
-				hasPeerBeenSet={hasPeerBeenSet}
-				setHasPeerBeenSet={setHasPeerBeenSet}
+				inCreatedRoom={inCreatedRoom}
+				setInCreatedRoom={setInCreatedRoom}
 				setPeerObjectToRoomName={setPeerObjectToRoomName}
 				setPeerObjectToClear={setPeerObjectToClear}
 			/>
-			<form onSubmit={(e) => handleConnection(e)}>
-				<label className="label">
-					<span className="label-text">Set your username</span>
-				</label>
-				<input
-					type="text"
-					placeholder="Attempt to Connect"
-					className="input input-bordered w-full max-w-xs"
-					value={connectionId}
-					onChange={(e) => setConnectionId(e.target.value)}
-				/>
-				<button
-					className="btn"
-					type="submit"
-				>
-					Attempt to Connect
-				</button>
-			</form>
+			{inCreatedRoom ? null : (
+				<form onSubmit={(e) => handleConnection(e)}>
+					<label className="label">
+						<span className="label-text">Set your username</span>
+					</label>
+					<input
+						type="text"
+						placeholder="Attempt to Connect"
+						className="input input-bordered w-full max-w-xs"
+						value={connectionId}
+						onChange={(e) => setConnectionId(e.target.value)}
+					/>
+					<button
+						className="btn"
+						type="submit"
+					>
+						Attempt to Connect
+					</button>
+				</form>
+			)}
 		</div>
 	);
 }

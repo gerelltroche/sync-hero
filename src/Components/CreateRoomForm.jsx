@@ -1,8 +1,8 @@
 export default function CreateRoomForm({
 	roomName,
 	setRoomName,
-	hasPeerBeenSet,
-	setHasPeerBeenSet,
+	inCreatedRoom,
+	setInCreatedRoom,
 	setPeerObjectToClear,
 	setPeerObjectToRoomName
 }) {
@@ -12,16 +12,16 @@ export default function CreateRoomForm({
 		if (roomName.length === 0) return;
 
 		setPeerObjectToRoomName(roomName);
-		setHasPeerBeenSet(true);
+		setInCreatedRoom(true);
 	}
 
 	function handleClearRoom() {
 		setRoomName("");
 		setPeerObjectToClear();
-		setHasPeerBeenSet(false);
+		setInCreatedRoom(false);
 	}
 
-	return hasPeerBeenSet ? (
+	return inCreatedRoom ? (
 		<div className="flex flex-col justify-items-start border p-6">
 			<div className="flex flex-row-reverse justify-between">
 				<div
@@ -81,7 +81,7 @@ export default function CreateRoomForm({
 				className="input input-bordered w-full sm:max-w-xs"
 				value={roomName}
 				onChange={(e) => setRoomName(e.target.value)}
-				disabled={hasPeerBeenSet}
+				disabled={inCreatedRoom}
 			/>
 			<button className="btn">Create Room</button>
 		</form>
