@@ -1,9 +1,11 @@
 import React from "react";
 import "./App.css";
 import Hero from "./Components/Hero";
+import CreateRoom from "./Components/createRoom";
 
 function App() {
   const [folders, setFolders] = React.useState([]);
+  const [isRoomCreated, setIsRoomCreated] = React.useState();
 
   async function getFolders() {
     const newFolders = [];
@@ -28,11 +30,18 @@ function App() {
   return (
     <>
       <div className="h-96">
-        <Hero
-          purpleText="Shred together, faster!"
-          title="SyncHero"
-          tagLine="Quickly identify and sync songs between players in CloneHero"
-          handleChange={handleChange}
+        {!isRoomCreated ? (
+          <Hero
+            purpleText="Shred together, faster!"
+            title="SyncHero"
+            tagLine="Quickly identify and sync songs between players in CloneHero"
+            handleChange={handleChange}
+            setIsRoomCreated={setIsRoomCreated}
+          />
+        ) : null}
+        <CreateRoom
+          isRoomCreated={isRoomCreated}
+          setIsRoomCreated={setIsRoomCreated}
         />
 
         <br />

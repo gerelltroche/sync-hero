@@ -5,10 +5,11 @@ export default function Hero({
   cta,
   secondaryCTA,
   handleChange,
+  setIsRoomCreated,
 }) {
   return (
     <section className="py-24 flex items-center h-full justify-center bg-white">
-      <div className="mx-auto max-w-[43rem]">
+      <div className=" animate-fade-in mx-auto max-w-[43rem]">
         <div className="text-center">
           {purpleText ? (
             <p className="text-lg font-medium leading-8 text-indigo-600/95">
@@ -44,11 +45,22 @@ export default function Hero({
               {secondaryCTA.text}
             </a>
           ) : null}
+
           <button
-            onClick={handleChange}
+            onClick={() => {
+              setIsRoomCreated(true);
+            }}
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
           >
-            Sync Now
+            Create Room
+          </button>
+          <button
+            onClick={() => {
+              setIsRoomCreated(true);
+            }}
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          >
+            Join a Room
           </button>
         </div>
       </div>
