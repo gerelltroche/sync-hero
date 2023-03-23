@@ -1,9 +1,11 @@
 import React from "react";
-export default function ConnectedRoom({ roomName }) {
-  console.log(roomName);
+
+export default function ConnectedRoom({ roomName, peerObject }) {
+  const connection = peerObject.connect(roomName);
+
   return (
     <section>
-      You are now connect to <p className="text-purple-700">{roomName}</p>
+      You are now connected to <p className="text-purple-700">{roomName}</p>
     </section>
   );
 }
